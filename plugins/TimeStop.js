@@ -73,7 +73,6 @@ frs.TimeStop = {}; // Local namespace
 
     // Modifys frs.TimeStop.affectedTiles and frs.TimeStop.tileEventLookups
     frs.TimeStop.UnfreezeSpot = function(positionArray) {
-        console.log(positionArray);
         frs.TimeStop.tileEventLookups.forEach(eventData => {
             let position = eventData[0];
             let eventID = eventData[1];
