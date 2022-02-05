@@ -4,6 +4,6 @@ var $plugins =
 [
 {"name":"Community_Basic","status":true,"description":"Basic plugin for manipulating important parameters.","parameters":{"cacheLimit":"20","screenWidth":"816","screenHeight":"624","changeWindowWidthTo":"","changeWindowHeightTo":"","renderingMode":"auto","alwaysDash":"off"}},
 {"name":"GALV_EventSpawner","status":true,"description":"(v.1.8) Spawn events from a specified spawn map to a desired location.","parameters":{"Spawn Map Id":"2"}},
-{"name":"TimeStop","status":true,"description":"Controls the spawning of time-freeze bubbles","parameters":{}}
+{"name":"TimeStop","status":true,"description":"Controls the spawning of time-freeze bubbles","parameters":{}},
 {"name":"GALV_EventDetectors","status":true,"description":"Have events activate when player gets in range and line of sight.","parameters":{"LOS Blocking Terrain":"5,6","LOS Blocking Regions":"1,2","Tile Size":"48","Search Limit":"24","--- Behaviors ---":"","Behavior 0":"","Behavior 1":"","Behavior 2":"","Behavior 3":"","Behavior 4":"","Behavior 5":"","Behavior 6":"","Behavior 7":"","Behavior 8":"","Behavior 9":"","Behavior 10":"","Behavior 11":"","Behavior 12":"","Behavior 13":"","Behavior 14":"","Behavior 15":"","Behavior 16":"","Behavior 17":"","Behavior 18":"","Behavior 19":"","Behavior 20":""}}
 ];
