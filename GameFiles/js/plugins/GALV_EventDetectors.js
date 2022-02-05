@@ -4,6 +4,7 @@
 //  For: RPGMAKER MV
 //  GALV_EventDetectors.js
 //-----------------------------------------------------------------------------
+//  2022-02-04 - Custom Version - Mason
 //  2016-08-21 - Version 1.2 - fixes to 'non detected' frequency
 //  2016-08-20 - Version 1.1 - fixed bug when no terrain or regions specified
 //  2016-08-01 - Version 1.0 - release
@@ -152,7 +153,7 @@ Galv.DETECT = Galv.DETECT || {};        // Galv's stuff
  * @default
  *
  * @help
- *   Galv's Event Detectors
+ *   Galv's Event Detectors - Custom
  * ----------------------------------------------------------------------------
  * This is a basic event detection plugin. It can allow events to detect the
  * player within a certain range and within line of sight.
@@ -300,22 +301,26 @@ Galv.DETECT.isBlock = function(x,y) {
 };
 
 Galv.DETECT.los = function(char1,char2) {
-	var a = {x:char1.x, y:char1.y};
-	var b = {x:char2.x, y:char2.y};
+	var a = {x:char1.x, y:char1.y}; // target (player)
+	var b = {x:char2.x, y:char2.y}; // event
 
 	// If in front
 	switch (char2._direction) {
-		case 2:
-			if (b.y > a.y) return false;
-			break;
+		case 2: // (down)
+			if (b.y > a.y) return false; // behind check
+			if (b.x != a.x) return false;
+			break
 		case 4:
 			if (b.x < a.x) return false;
+			if (b.y != a.y) return false;
 			break;
 		case 6:
 			if (b.x > a.x) return false;
+			if (b.y != a.y) return false;
 			break;
 		case 8:
 			if (b.y < a.y) return false;
+			if (b.x != a.x) return false;
 			break;
 		default:
 			
