@@ -98,6 +98,24 @@ frs.TimeStop = {}; // Local namespace
         });
     }
 
+    frs.TimeStop.handleTimestopEnter = function(object) {
+        if (object instanceof Game_Event && !(object instanceof Game_SpawnEvent)) {
+            let objectEvent = $dataMap.events[object._eventId];
+            if (objectEvent.meta.frs_isGuard) {
+                $gameSelfSwitches.setValue([$gameMap.mapId(), object._eventId, objectEvent.meta.frs_isGuard], true);
+            }
+        }
+    }
+
+    frs.TimeStop.handleTimestopLeave = function(object) {
+        if (object instanceof Game_Event && !(object instanceof Game_SpawnEvent)) {
+            let objectEvent = $dataMap.events[object._eventId];
+            if (objectEvent.meta.frs_isGuard) {
+                $gameSelfSwitches.setValue([$gameMap.mapId(), object._eventId, objectEvent.meta.frs_isGuard], false);
+            }
+        }
+    }
+
     // -------------- UPDATE PROTOTYPES --------------
     let Game_CharacterBase_prototype_initMembers = Game_CharacterBase.prototype.initMembers;
     Game_CharacterBase.prototype.initMembers = function() {
@@ -108,8 +126,10 @@ frs.TimeStop = {}; // Local namespace
 
     let Game_CharacterBase_prototype_update = Game_CharacterBase.prototype.update;
     Game_CharacterBase.prototype.update = function() {
+        let inTimeStopBefore = true;
         if (!this.frs_inTimeStop) {
             Game_CharacterBase_prototype_update.call(this);
+            inTimeStopBefore = false;
         }
 
         if (this.frs_isAffectedByTime) {
@@ -122,6 +142,12 @@ frs.TimeStop = {}; // Local namespace
                     this.frs_inTimeStop = true;
                 }
             });
+
+            if (this.frs_inTimeStop && !inTimeStopBefore) {
+                frs.TimeStop.handleTimestopEnter(this);
+            } else if (!this.frs_inTimeStop && inTimeStopBefore) {
+                frs.TimeStop.handleTimestopLeave(this);
+            }
         }
     };
 })();
