@@ -99,19 +99,89 @@ frs.TimeStop = {}; // Local namespace
     }
 
     frs.TimeStop.handleTimestopEnter = function(object) {
-        if (object instanceof Game_Event && !(object instanceof Game_SpawnEvent)) {
+        if (object instanceof Game_Event && !(object instanceof Game_SpawnEvent)) { // only worry about game_events, not GALV spawn events
             let objectEvent = $dataMap.events[object._eventId];
+            // Although this is duplicated code, kept explicit cases in event that we need to expand logic for one.
             if (objectEvent.meta.frs_isGuard) {
                 $gameSelfSwitches.setValue([$gameMap.mapId(), object._eventId, objectEvent.meta.frs_isGuard], true);
+            }
+            if (objectEvent.meta.frs_isButton) {
+                let buttonMetaInfo = objectEvent.meta.frs_isButton.split(',');
+
+                let selfSwitchOn = buttonMetaInfo[0];
+                let selfSwitchOff = buttonMetaInfo[1];
+                let onConditionSelfSwitch = buttonMetaInfo[2];
+
+                let isOff = $gameSelfSwitches.value([$gameMap.mapId(), object._eventId, onConditionSelfSwitch]);
+
+                let selfSwitch = selfSwitchOn;
+                if (isOff) {
+                    selfSwitch = selfSwitchOff;
+                }
+
+                object.frs_freezeState.isOffOnFreeze = isOff;
+
+                $gameSelfSwitches.setValue([$gameMap.mapId(), object._eventId, selfSwitch], true);
+            }
+            if (objectEvent.meta.frs_isDoor) {
+                // RPG maker tags are strings, so we split the tag into an array and parse the array
+                let doorMetaInfo = objectEvent.meta.frs_isDoor.split(',');
+
+                let selfSwitchOpen = doorMetaInfo[0];
+                let selfSwitchClosed = doorMetaInfo[1];
+                let openConditionSwitch = parseInt(doorMetaInfo[2]);
+
+                let isOpen = $gameSwitches._data[openConditionSwitch];
+
+                let selfSwitch = selfSwitchOpen;
+                if (!isOpen) {
+                    selfSwitch = selfSwitchClosed;
+                }
+
+                // Remember the state on frozen so we can toggle the correct state on timestop leave
+                object.frs_freezeState.isOpenOnFreeze = isOpen;
+
+                $gameSelfSwitches.setValue([$gameMap.mapId(), object._eventId, selfSwitch], true);
             }
         }
     }
 
     frs.TimeStop.handleTimestopLeave = function(object) {
-        if (object instanceof Game_Event && !(object instanceof Game_SpawnEvent)) {
+        if (object instanceof Game_Event && !(object instanceof Game_SpawnEvent)) { // only worry about game_events, not GALV spawn events
             let objectEvent = $dataMap.events[object._eventId];
+            // Although this is duplicated code, kept explicit cases in event that we need to expand logic for one.
             if (objectEvent.meta.frs_isGuard) {
                 $gameSelfSwitches.setValue([$gameMap.mapId(), object._eventId, objectEvent.meta.frs_isGuard], false);
+            }
+            if (objectEvent.meta.frs_isButton) {
+                let buttonMetaInfo = objectEvent.meta.frs_isButton.split(',');
+
+                let selfSwitchOn = buttonMetaInfo[0];
+                let selfSwitchOff = buttonMetaInfo[1];
+
+                let isOff = object.frs_freezeState.isOffOnFreeze;
+
+                let selfSwitch = selfSwitchOn;
+                if (isOff) {
+                    selfSwitch = selfSwitchOff;
+                }
+
+                $gameSelfSwitches.setValue([$gameMap.mapId(), object._eventId, selfSwitch], false);
+            }
+            if (objectEvent.meta.frs_isDoor) {
+                // RPG maker tags are strings, so we split the tag into an array and parse the array
+                let doorMetaInfo = objectEvent.meta.frs_isDoor.split(',');
+
+                let selfSwitchOpen = doorMetaInfo[0];
+                let selfSwitchClosed = doorMetaInfo[1];
+
+                let isOpen = object.frs_freezeState.isOpenOnFreeze;
+                let selfSwitch = selfSwitchOpen;
+                if (!isOpen) {
+                    selfSwitch = selfSwitchClosed;
+                }
+
+                $gameSelfSwitches.setValue([$gameMap.mapId(), object._eventId, selfSwitch], false);
             }
         }
     }
@@ -121,6 +191,7 @@ frs.TimeStop = {}; // Local namespace
     Game_CharacterBase.prototype.initMembers = function() {
         this.frs_inTimeStop = false;
         this.frs_isAffectedByTime = true;
+        this.frs_freezeState = {}; // object for any meta info we need for this event during/post timestop
         Game_CharacterBase_prototype_initMembers.call(this);
     };
 
