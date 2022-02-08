@@ -227,7 +227,7 @@ frs.TimeStop = {}; // Local namespace
     let Game_CharacterBase_prototype_update = Game_CharacterBase.prototype.update;
     Game_CharacterBase.prototype.update = function() {
         let inTimeStopBefore = this.frs_inTimeStop;
-        if (!this.frs_isAffectedByTime || !this.frs_inTimeStop) {
+        if (!this.frs_isAffectedByTime || !this.frs_inTimeStop || (this.frs_inTimeStop && this.isMoving())) {
             Game_CharacterBase_prototype_update.call(this);
         }
 
@@ -236,7 +236,7 @@ frs.TimeStop = {}; // Local namespace
             let x = position[0];
             let y = position[1];
 
-            if (this._realX === x && this._realY === y) {
+            if (this._x === x && this._y === y) {
                 this.frs_inTimeStop = true;
             }
         });
