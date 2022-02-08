@@ -5,6 +5,7 @@
  * 
  * @help
  * SCRIPT commands
+ *  frs.TimeStop.isFrozen(eventID);         // Returns whether or not this event is in a time freeze zone
  *  frs.TimeStop.FreezeArea(x, y);          // Freeze area around the position provided
  *  frs.TimeStop.UnfreezeArea([x, y]);      // Unfreeze are around the position provided. Same shape as the freeze
  *  frs.TimeStop.FreezeSpot(x, y);          // Freeze specific position
@@ -53,6 +54,14 @@ frs.TimeStop = {}; // Local namespace
             [-1, -1]
         ]
     ];
+
+    frs.TimeStop.isFrozen = function(eventID) {
+        let event = $gameMap.event(eventID);
+        if (event instanceof Game_CharacterBase) {
+            return event.frs_inTimeStop;
+        }
+        return false;
+    }
 
     // Pattern arbitrary, make sure it is the same pattern as defined in frs.TimeStop.UnfreezeArea
     frs.TimeStop.FreezeArea = function(x, y) {
