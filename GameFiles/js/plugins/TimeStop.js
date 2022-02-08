@@ -236,7 +236,7 @@ frs.TimeStop = {}; // Local namespace
             let x = position[0];
             let y = position[1];
 
-            if (this._x === x && this._y === y) {
+            if (this._realX === x && this._realY === y) {
                 this.frs_inTimeStop = true;
             }
         });
