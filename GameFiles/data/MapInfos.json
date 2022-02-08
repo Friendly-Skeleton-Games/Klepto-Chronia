@@ -14,5 +14,6 @@ null,
 {"id":12,"expanded":false,"name":"Room1","order":12,"parentId":0,"scrollX":832,"scrollY":640},
 {"id":13,"expanded":false,"name":"Room2","order":13,"parentId":0,"scrollX":832,"scrollY":640},
 {"id":14,"expanded":false,"name":"Room3","order":14,"parentId":0,"scrollX":498,"scrollY":452.5},
-{"id":15,"expanded":false,"name":"PreTitle","order":15,"parentId":0,"scrollX":1081.3333333333333,"scrollY":615.3333333333334}
+{"id":15,"expanded":false,"name":"PreTitle","order":15,"parentId":0,"scrollX":934,"scrollY":607.5},
+{"id":16,"expanded":false,"name":"Templates","order":16,"parentId":0,"scrollX":498,"scrollY":452.5}
 ]
