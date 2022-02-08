@@ -23,25 +23,43 @@ var frs = frs || {}; // Main namespace
 frs.TimeStop = {}; // Local namespace
 
 (function() {
+    frs.TimeStop.timeFreezeVariable = 3;
+    frs.TimeStop.timeCrystalVariable = 4;
+
     frs.TimeStop.affectedTiles = [];
     frs.TimeStop.tileEventLookups = [];
     frs.TimeStop.lastFrozenArea = [];
     frs.TimeStop.lastFrozenSpot = [];
 
+    // index is the count of time crystals from 0-2
+    frs.TimeStop.patterns = [
+        [],
+        [
+            [ 0,  0],
+            [ 1,  0],
+            [-1,  0],
+            [ 0,  1],
+            [ 0, -1]
+        ],
+        [
+            [ 0,  0],
+            [ 1,  0],
+            [-1,  0],
+            [ 0,  1],
+            [ 0, -1],
+            [ 1,  1],
+            [-1,  1],
+            [ 1, -1],
+            [-1, -1]
+        ]
+    ];
+
     // Pattern arbitrary, make sure it is the same pattern as defined in frs.TimeStop.UnfreezeArea
     frs.TimeStop.FreezeArea = function(x, y) {
-        frs.TimeStop.FreezeSpot(1, x + 0, y + 0);
-
-        frs.TimeStop.FreezeSpot(1, x + 1, y + 0);
-        frs.TimeStop.FreezeSpot(1, x - 1, y + 0);
-        frs.TimeStop.FreezeSpot(1, x + 0, y + 1);
-        frs.TimeStop.FreezeSpot(1, x + 0, y - 1);
-
-        frs.TimeStop.FreezeSpot(1, x + 1, y + 1);
-        frs.TimeStop.FreezeSpot(1, x - 1, y + 1);
-        frs.TimeStop.FreezeSpot(1, x + 1, y - 1);
-        frs.TimeStop.FreezeSpot(1, x - 1, y - 1);
-
+        frs.TimeStop.patterns[$gameVariables.value(frs.TimeStop.timeCrystalVariable)].forEach(offset => {
+            frs.TimeStop.FreezeSpot(1, x + offset[0], y + offset[1]);
+        });
+        
         frs.TimeStop.lastFrozenArea = [x, y];
     }
 
@@ -51,17 +69,9 @@ frs.TimeStop = {}; // Local namespace
         let x = positionArray[0];
         let y = positionArray[1];
 
-        frs.TimeStop.UnfreezeSpot([x + 0, y + 0]);
-
-        frs.TimeStop.UnfreezeSpot([x + 1, y + 0]);
-        frs.TimeStop.UnfreezeSpot([x - 1, y + 0]);
-        frs.TimeStop.UnfreezeSpot([x + 0, y + 1]);
-        frs.TimeStop.UnfreezeSpot([x + 0, y - 1]);
-
-        frs.TimeStop.UnfreezeSpot([x + 1, y + 1]);
-        frs.TimeStop.UnfreezeSpot([x - 1, y + 1]);
-        frs.TimeStop.UnfreezeSpot([x + 1, y - 1]);
-        frs.TimeStop.UnfreezeSpot([x - 1, y - 1]);
+        frs.TimeStop.patterns[$gameVariables.value(frs.TimeStop.timeCrystalVariable)].forEach(offset => {
+            frs.TimeStop.UnfreezeSpot([x + offset[0], y + offset[1]]);
+        });
     }
 
     // Doesn't modify frs.TimeStop.affectedTiles. Assumption is that whatever event which freezes tiles will call it on spawn
@@ -97,8 +107,23 @@ frs.TimeStop = {}; // Local namespace
             return !(eventData[0][0] === positionArray[0] && eventData[0][1] === positionArray[1]);
         });
     }
+    
+    frs.TimeStop.playerHandleTimestopEnter = function(player) {
+        
+    }
+
+    frs.TimeStop.playerHandleTimestopLeave = function(player) {
+        if ($gameVariables.value(frs.TimeStop.timeCrystalVariable) == 1) {
+            frs.TimeStop.UnfreezeArea(frs.TimeStop.lastFrozenArea);
+            $gameVariables.setValue(frs.TimeStop.timeFreezeVariable, 0); // unfreeze time
+        }
+    }
 
     frs.TimeStop.handleTimestopEnter = function(object) {
+        if (object === $gamePlayer) {
+            frs.TimeStop.playerHandleTimestopEnter(object);
+        }
+
         if (object instanceof Game_Event && !(object instanceof Game_SpawnEvent)) { // only worry about game_events, not GALV spawn events
             let objectEvent = $dataMap.events[object._eventId];
             // Although this is duplicated code, kept explicit cases in event that we need to expand logic for one.
@@ -147,6 +172,10 @@ frs.TimeStop = {}; // Local namespace
     }
 
     frs.TimeStop.handleTimestopLeave = function(object) {
+        if (object === $gamePlayer) {
+            frs.TimeStop.playerHandleTimestopLeave(object);
+        }
+
         if (object instanceof Game_Event && !(object instanceof Game_SpawnEvent)) { // only worry about game_events, not GALV spawn events
             let objectEvent = $dataMap.events[object._eventId];
             // Although this is duplicated code, kept explicit cases in event that we need to expand logic for one.
@@ -197,28 +226,25 @@ frs.TimeStop = {}; // Local namespace
 
     let Game_CharacterBase_prototype_update = Game_CharacterBase.prototype.update;
     Game_CharacterBase.prototype.update = function() {
-        let inTimeStopBefore = true;
-        if (!this.frs_inTimeStop) {
+        let inTimeStopBefore = this.frs_inTimeStop;
+        if (!this.frs_isAffectedByTime || !this.frs_inTimeStop) {
             Game_CharacterBase_prototype_update.call(this);
-            inTimeStopBefore = false;
         }
 
-        if (this.frs_isAffectedByTime) {
-            this.frs_inTimeStop = false;
-            frs.TimeStop.affectedTiles.forEach(position => {
-                let x = position[0];
-                let y = position[1];
+        this.frs_inTimeStop = false;
+        frs.TimeStop.affectedTiles.forEach(position => {
+            let x = position[0];
+            let y = position[1];
 
-                if (this._x === x && this._y === y) {
-                    this.frs_inTimeStop = true;
-                }
-            });
-
-            if (this.frs_inTimeStop && !inTimeStopBefore) {
-                frs.TimeStop.handleTimestopEnter(this);
-            } else if (!this.frs_inTimeStop && inTimeStopBefore) {
-                frs.TimeStop.handleTimestopLeave(this);
+            if (this._x === x && this._y === y) {
+                this.frs_inTimeStop = true;
             }
+        });
+
+        if (this.frs_inTimeStop && !inTimeStopBefore) {
+            frs.TimeStop.handleTimestopEnter(this);
+        } else if (!this.frs_inTimeStop && inTimeStopBefore) {
+            frs.TimeStop.handleTimestopLeave(this);
         }
     };
 })();
