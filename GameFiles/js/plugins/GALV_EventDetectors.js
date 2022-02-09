@@ -339,12 +339,12 @@ Galv.DETECT.los = function(char1,char2) {
 
 		for (var x = a.x; x <= b.x; x++) {
 			var y = slope * x + int;
-			if (Galv.DETECT.isBlock(x,y)) return false;
+			if (Galv.DETECT.isBlock(x,y) && (b.x != x || b.y !=y)) return false;
 		}
 		
 		for (var x = a.x; x >= b.x; x--) {
 			var y = slope * x + int;
-			if (Galv.DETECT.isBlock(x,y)) return false;
+			if (Galv.DETECT.isBlock(x,y) && (b.x != x || b.y !=y)) return false;
 		}
 	} else if (Math.abs(a.y - b.y) >= Math.abs(a.x - b.x)) {
 		// v slope
@@ -358,12 +358,12 @@ Galv.DETECT.los = function(char1,char2) {
 	
 		for (var y = a.y; y <= b.y; y++) {
 			var x = slope * y + int;
-			if (Galv.DETECT.isBlock(x,y)) return false;
+			if (Galv.DETECT.isBlock(x,y) && (b.x != x || b.y !=y)) return false;
 		}
 		
 		for (var y = a.y; y >= b.y; y--) {
 			var x = slope * y + int;
-			if (Galv.DETECT.isBlock(x,y)) return false;
+			if (Galv.DETECT.isBlock(x,y) && (b.x != x || b.y !=y)) return false;
 		}
 	};
 	return true;
