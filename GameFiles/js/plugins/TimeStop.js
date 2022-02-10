@@ -26,7 +26,7 @@ frs.TimeStop = {}; // Local namespace
 (function() {
     frs.TimeStop.timeFreezeVariable = 3;
     frs.TimeStop.timeCrystalVariable = 4;
-    frs.TimeStop.timeStopCommonEvent = 1;
+    frs.TimeStop.timeStopCommonEvent = 3;
 
     frs.TimeStop.affectedTiles = [];
     frs.TimeStop.tileEventLookups = [];
@@ -123,8 +123,8 @@ frs.TimeStop = {}; // Local namespace
     }
 
     frs.TimeStop.playerHandleTimestopLeave = function(player) {
-        if ($gameVariables.value(frs.TimeStop.timeCrystalVariable) == 1) {
-            $gameMap._interpreter.setup($dataCommonEvents[frs.TimeStop.timeStopCommonEvent].list);
+        if ($gameVariables.value(frs.TimeStop.timeCrystalVariable) === 1 && $gameVariables.value(frs.TimeStop.timeFreezeVariable) === 1) {
+            $gameMap._interpreter.setup($dataCommonEvents[frs.TimeStop.timeStopCommonEvent].list, frs.TimeStop.timeStopCommonEvent);
         }
     }
 
