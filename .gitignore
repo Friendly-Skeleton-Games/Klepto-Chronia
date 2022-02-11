@@ -1,1 +1,3 @@
-GameFiles/data/MapInfos.json
+GameFiles/.vscode/
+GameFiles/package.json
+GameFiles/save/config.rpgsave

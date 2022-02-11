@@ -38,7 +38,7 @@ Game_Temp.prototype.reservedCommonEvent = function() {
     return $dataCommonEvents[this._commonEventId];
 };
 
-Game_Temp.prototype.setDestination = function(x, y) {
+Game_Temp.prototype.setDestination = function(x, y) { return;
     this._destinationX = x;
     this._destinationY = y;
 };
