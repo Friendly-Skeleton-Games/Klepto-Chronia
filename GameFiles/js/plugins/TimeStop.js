@@ -90,6 +90,7 @@ frs.TimeStop = {}; // Local namespace
 
     // Pattern arbitrary, make sure it is the same pattern as defined in frs.TimeStop.UnfreezeArea
     frs.TimeStop.FreezeArea = function(x, y) {
+        x = Math.round(x); y = Math.round(y);
         frs.TimeStop.patterns[$gameVariables.value(frs.TimeStop.timeCrystalVariable)].forEach(offset => {
             frs.TimeStop.FreezeSpot(1, x + offset[0], y + offset[1]);
         });
@@ -269,7 +270,7 @@ frs.TimeStop = {}; // Local namespace
             let x = position[0];
             let y = position[1];
 
-            if (this._x === x && this._y === y) {
+            if (Math.round(this._x) === x && Math.round(this._y) === y) {
                 this.frs_inTimeStop = true;
             }
         });
