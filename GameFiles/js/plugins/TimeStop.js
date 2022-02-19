@@ -82,6 +82,19 @@ frs.TimeStop = {}; // Local namespace
             [-1, -2],
             [ 0, -2],
             [ 1, -2],
+        ],
+        [
+            [ 0,  0],
+
+            [ 1,  0],
+            [-1,  0],
+            [ 0,  1],
+            [ 0, -1],
+
+            [ 1,  1],
+            [-1,  1],
+            [ 1, -1],
+            [-1, -1]
         ]
     ];
 
@@ -101,6 +114,22 @@ frs.TimeStop = {}; // Local namespace
         });
         
         frs.TimeStop.lastFrozenArea = [x, y];
+    }
+
+    frs.TimeStop.FreezeAreaSquare = function(x, y) {
+        x = Math.round(x); y = Math.round(y);
+        frs.TimeStop.patterns[$gameVariables.value(3)].forEach(offset => {
+            frs.TimeStop.FreezeSpot(1, x + offset[0], y + offset[1]);
+        });
+    }
+
+    frs.TimeStop.UnfreezeAreaSquare = function(positionArray) {
+        let x = positionArray[0];
+        let y = positionArray[1];
+
+        frs.TimeStop.patterns[$gameVariables.value(3)].forEach(offset => {
+            frs.TimeStop.UnfreezeSpot([x + offset[0], y + offset[1]]);
+        });
     }
 
     // Make sure same pattern as in frs.TimeStop.FreezeArea
