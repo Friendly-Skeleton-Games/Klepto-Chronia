@@ -15,7 +15,6 @@
  * 
  * Javascript Variables
  *  frs.TimeStop.affectedTiles;             // Array in format { [x0, y0], [x1, y1], ... }. List of all currently frozen tiles
- *  frs.TimeStop.tileEventLookups;          // Array in format { [[x0, y0], EiD0], [[x1, y1], EiD1], ... }. List of all currently frozen tiles and their associated event ID's
  *  frs.TimeStop.lastFrozenArea;            // Array in format { x, y }. Last area frozen by script command
  *  frs.TimeStop.lastFrozenSpot;            // Array in format { x, y }. Last spot frozen by script command
  */
@@ -28,8 +27,17 @@ frs.TimeStop = {}; // Local namespace
     frs.TimeStop.timeCrystalVariable = 4;
     frs.TimeStop.timeStopCommonEvent = 3;
 
+    // In format [xOffset, yOffset, eventID]
+    frs.TimeStop.timeStopVisualEvents = [
+        [-1, -1, 3],
+        [2, -1, 4],
+        [-1, 1, 5],
+        [0, 2, 6],
+        [2, 1, 7]
+    ];
+
     frs.TimeStop.affectedTiles = [];
-    frs.TimeStop.tileEventLookups = [];
+    frs.TimeStop.visualTiles = new Map();
     frs.TimeStop.lastFrozenArea = [];
     frs.TimeStop.lastFrozenSpot = [];
 
@@ -98,6 +106,22 @@ frs.TimeStop = {}; // Local namespace
         ]
     ];
 
+    // Map R2 -> R so we can use it in a hashmap
+    frs.TimeStop.cantorPairing = function(x, y) {
+        // convert fron Z -> N
+        let xLessThanZero = x < 0;
+        let yLessThanZero = y < 0;
+
+        // 2n if n > 0, otherwise 2n + 1 if n < 0. aka all negatives to odds, all positives to evens
+        let xNatural = 2 * x * (1 - xLessThanZero) + (-2 * x - 1) * xLessThanZero;
+        let yNatural = 2 * y * (1 - yLessThanZero) + (-2 * y - 1) * yLessThanZero;
+
+        // Use the cantor pairing function to map natural pairs of numbers to a single natural
+        let cantor = 0.5 * (xNatural + yNatural) * (xNatural + yNatural + 1) + yNatural;
+
+        return cantor;
+    }
+
     frs.TimeStop.isFrozen = function(eventID) {
         let event = $gameMap.event(eventID);
         if (event instanceof Game_CharacterBase) {
@@ -110,16 +134,17 @@ frs.TimeStop = {}; // Local namespace
     frs.TimeStop.FreezeArea = function(x, y) {
         x = Math.round(x); y = Math.round(y);
         frs.TimeStop.patterns[$gameVariables.value(frs.TimeStop.timeCrystalVariable)].forEach(offset => {
-            frs.TimeStop.FreezeSpot(1, x + offset[0], y + offset[1]);
+            frs.TimeStop.FreezeSpot(x + offset[0], y + offset[1]);
         });
         
+        frs.TimeStop.SpawnVisualBubble(x, y);
         frs.TimeStop.lastFrozenArea = [x, y];
     }
 
     frs.TimeStop.FreezeAreaSquare = function(x, y) {
         x = Math.round(x); y = Math.round(y);
         frs.TimeStop.patterns[$gameVariables.value(3)].forEach(offset => {
-            frs.TimeStop.FreezeSpot(1, x + offset[0], y + offset[1]);
+            frs.TimeStop.FreezeSpot(x + offset[0], y + offset[1]);
         });
     }
 
@@ -133,7 +158,7 @@ frs.TimeStop = {}; // Local namespace
     }
 
     // Make sure same pattern as in frs.TimeStop.FreezeArea
-    // Manipulates frs.TimeStop.tileEventLookups and frs.TimeStop.affectedTiles -- don't call while looping through or else you may invalidate an iterator
+    // Manipulates frs.TimeStop.affectedTiles -- don't call while looping through or else you may invalidate an iterator
     frs.TimeStop.UnfreezeArea = function(positionArray) {
         let x = positionArray[0];
         let y = positionArray[1];
@@ -141,25 +166,39 @@ frs.TimeStop = {}; // Local namespace
         frs.TimeStop.patterns[$gameVariables.value(frs.TimeStop.timeCrystalVariable)].forEach(offset => {
             frs.TimeStop.UnfreezeSpot([x + offset[0], y + offset[1]]);
         });
+
+        frs.TimeStop.DespawnVisualBubble(x, y);
     }
 
+    frs.TimeStop.SpawnVisualBubble = function(x, y) {
+        let associatedEvents = [];
+        frs.TimeStop.timeStopVisualEvents.forEach(visualSpot => {
+            let xOffset = visualSpot[0];
+            let yOffset = visualSpot[1];
+            let eventID = visualSpot[2];
+
+            Galv.SPAWN.event(eventID, x + xOffset, y + yOffset);
+            associatedEvents.push($gameMap._lastSpawnEventId);
+        });
+        frs.TimeStop.visualTiles.set(frs.TimeStop.cantorPairing(x, y), associatedEvents);
+    };
+
+    frs.TimeStop.DespawnVisualBubble = function(x, y) {
+        let associatedEvents = frs.TimeStop.visualTiles.get(frs.TimeStop.cantorPairing(x, y));
+        associatedEvents.forEach(eventID => {
+            $gameMap.unspawnEvent(eventID);
+            SceneManager._scene._spriteset.unspawnEvent(eventID);
+        });
+    };
+
     // Doesn't modify frs.TimeStop.affectedTiles. Assumption is that whatever event which freezes tiles will call it on spawn
-    frs.TimeStop.FreezeSpot = function(eventType, x, y) {
-        Galv.SPAWN.event(eventType, x, y);
-        frs.TimeStop.tileEventLookups.push([[x, y], $gameMap._lastSpawnEventId]);
+    frs.TimeStop.FreezeSpot = function(x, y) {
+        frs.TimeStop.Spawn(x, y);
         frs.TimeStop.lastFrozenSpot = [x, y];
     }
 
-    // Modifys frs.TimeStop.affectedTiles and frs.TimeStop.tileEventLookups
+    // Modifys frs.TimeStop.affectedTiles
     frs.TimeStop.UnfreezeSpot = function(positionArray) {
-        frs.TimeStop.tileEventLookups.forEach(eventData => {
-            let position = eventData[0];
-            let eventID = eventData[1];
-            if (position[0] === positionArray[0] && position[1] === positionArray[1]) {
-                $gameMap.unspawnEvent(eventID);
-                SceneManager._scene._spriteset.unspawnEvent(eventID);
-            }
-        });
         frs.TimeStop.Despawn(positionArray);
     }
 
@@ -171,9 +210,6 @@ frs.TimeStop = {}; // Local namespace
     frs.TimeStop.Despawn = function(positionArray) {
         frs.TimeStop.affectedTiles = frs.TimeStop.affectedTiles.filter(position => {
             return !(position[0] === positionArray[0] && position[1] === positionArray[1])
-        });
-        frs.TimeStop.tileEventLookups = frs.TimeStop.tileEventLookups.filter(eventData => {
-            return !(eventData[0][0] === positionArray[0] && eventData[0][1] === positionArray[1]);
         });
     }
     
