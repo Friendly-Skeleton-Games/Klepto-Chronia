@@ -183,6 +183,7 @@ frs.TimeStop = {}; // Local namespace
 
     frs.TimeStop.playerHandleTimestopLeave = function(player) {
         if ($gameVariables.value(frs.TimeStop.timeCrystalVariable) === 1 && $gameVariables.value(frs.TimeStop.timeFreezeVariable) === 1) {
+            $gameSwitches.setValue(50,true);
             $gameMap._interpreter.setup($dataCommonEvents[frs.TimeStop.timeStopCommonEvent].list, frs.TimeStop.timeStopCommonEvent);
         }
     }
