@@ -3,4 +3,4 @@
 |https://sscary.itch.io/natural-free-assets 											| M 						|
 |https://finalbossblues.itch.io/fantasy-rpg-tileset-pack								| M 						|
 |https://forums.rpgmakerweb.com/index.php?threads/com_sho-forest-tilesets.116866/		| M 						|
-|https://rpgmaker.net/resources/394/	(com-sho group of stuff)						| M							|
+|https://rpgmaker.net/resources/394/	(com-sho group of stuff)						| Y  						|
