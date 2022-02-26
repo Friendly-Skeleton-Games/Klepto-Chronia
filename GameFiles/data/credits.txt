@@ -1,0 +1,19 @@
+<block:-1,-3,255,255,offbot,center,Crystal>
+CREDITS
+
+\c[2]Team
+Alec Zaiane
+Bailey Danyluk
+Cassandra MacCarthy
+Leslie Qin
+Mason Bly
+Natalie Bombardieri
+
+\c[2]External Art
+
+\c[2]External Plugins
+
+\c[2]Engine
+RPG Maker MV
+
+</block>
