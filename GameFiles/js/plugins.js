@@ -12,5 +12,7 @@ var $plugins =
 {"name":"HIME_PreTitleEvents","status":true,"description":"Build your own sequence of events that should occur before\r\nthe title screen begins","parameters":{"Pre-Title Map ID":"15","Use As Title":"false"}},
 {"name":"Galv_PixelMove","status":true,"description":"(v.1.4) Gives the illusion of pixel movement for the player.","parameters":{"Diagonal Speed":"90","Diagonal Charset":"false","Tile Delay":"15"}},
 {"name":"CacheXHR","status":true,"description":"","parameters":{}},
-{"name":"POR_InputBlockKM","status":true,"description":"Plugin used to block all movement input via switch.","parameters":{"BlockSwitchKeyboard":"20","BlockSwitchMouse":"1"}}
+{"name":"POR_InputBlockKM","status":true,"description":"Plugin used to block all movement input via switch.","parameters":{"BlockSwitchKeyboard":"20","BlockSwitchMouse":"1"}},
+{"name":"AltMenuScreen","status":true,"description":"Alternative menu screen layout.","parameters":{}},
+{"name":"GALV_RollCredits","status":true,"description":"(v.1.5) A plugin that calls a new scene to display scrolling information located in an external text file.","parameters":{"Folder":"data","Skippable":"true","Block Skipping":"true","Title Menu":"Credits","Title Credits Music":""}}
 ];
