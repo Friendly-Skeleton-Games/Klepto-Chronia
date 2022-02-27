@@ -1,6 +1,4 @@
-| Link 																					| used [(y)es/(n)o/(m)aybe] |
-|---------------------------------------------------------------------------------------|---------------------------|
-|https://sscary.itch.io/natural-free-assets 											| M 						|
-|https://finalbossblues.itch.io/fantasy-rpg-tileset-pack								| M 						|
-|https://forums.rpgmakerweb.com/index.php?threads/com_sho-forest-tilesets.116866/		| M 						|
-|https://rpgmaker.net/resources/394/	(com-sho group of stuff)						| Y  						|
+| Link 																																						| used [(y)es/(n)o/(m)aybe] |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------|
+|https://rpgmaker.net/resources/394/	(com-sho group of stuff)						                                             						| Y (edited)  				|
+|https://forums.rpgmakerweb.com/index.php?threads/rpg-maker-mv-resources-x5-robotic-suit-png-and-2-music-tracks-plus-modern-tall-sprite-clothing.128887/ 	| Y (edited) 				|
