@@ -29,11 +29,7 @@ frs.TimeStop = {}; // Local namespace
 
     // In format [xOffset, yOffset, eventID]
     frs.TimeStop.timeStopVisualEvents = [
-        [-1, -1, 3],
-        [2, -1, 4],
-        [-1, 1, 5],
-        [0, 2, 6],
-        [2, 1, 7]
+        [0, 2, 8],
     ];
 
     frs.TimeStop.affectedTiles = [];
