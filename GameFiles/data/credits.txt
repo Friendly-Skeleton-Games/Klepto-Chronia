@@ -1,4 +1,4 @@
-<block:-1,-3,255,255,offbot,center,Crystal>
+<block:-1,-3,255,255,offbot,left,Crystal>
 CREDITS
 
 \c[2]Team
@@ -10,8 +10,42 @@ Mason Bly
 Natalie Bombardieri
 
 \c[2]External Art
+Com-sho tileset packs (compilation) 
+    com-sho
+    rpgmaker.net/resources/394
+
+Argent Pixel
+    Connary Fagen
+    behance.net/gallery/74143595/Argent-Pixel-CF-lo-fi-bitmap-serif-typeface/modules/431271195
 
 \c[2]External Plugins
+DK_Full_Input
+    DKPlugins
+    dk-plugins.ru/full-input/
+
+GALV_EventDetectors
+    Galv
+    galv-scripts.com
+
+GALV_EventSpawner
+    Galv
+    galv-scripts.com
+
+GALV_RollCredits
+    Galv
+    galvs-scripts.com
+
+Galv_PixelMove
+    Galv
+    galvs-scripts.com
+
+HIME_PreTitleEvents
+    Hime
+    himeworks.com/2015/11/pre-title-events/
+    
+Jay_VariableMix
+    Jason R. Godding
+    pastebin.com/Wq8SzNs5
 
 \c[2]Engine
 RPG Maker MV
