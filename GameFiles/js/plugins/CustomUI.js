@@ -1,21 +1,3 @@
-//=============================================================================
-// AltMenuScreen.js
-//=============================================================================
-
-/*:
- * @plugindesc Alternative menu screen layout.
- * @author Yoji Ojima
- *
- * @help This plugin does not provide plugin commands.
- */
-
-/*:ja
- * @plugindesc メニュー画面のレイアウトを変更します。
- * @author Yoji Ojima
- *
- * @help このプラグインには、プラグインコマンドはありません。
- */
-
 (function() {
     function Window_Hint() {
         this.initialize.apply(this, arguments);
@@ -68,7 +50,7 @@
     };
 
     Window_MenuCommand.prototype.addOriginalCommands = function() {
-        this.addCommand("Request Hint", 'hint', true);
+        //this.addCommand("Request Hint", 'hint', true);
     };
 
     Window_MenuCommand.prototype.makeCommandList = function() {
