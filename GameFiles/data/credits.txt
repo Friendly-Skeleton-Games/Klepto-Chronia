@@ -1,7 +1,7 @@
 <block:-1,-3,255,255,offbot,left,Crystal>
 CREDITS
 
-\c[2]Team
+\c[2]Development\c[0]
 Alec Zaiane
 Bailey Danyluk
 Cassandra MacCarthy
@@ -9,7 +9,11 @@ Leslie Qin
 Mason Bly
 Natalie Bombardieri
 
-\c[2]External Art
+\c[2]Mentors\c[0]
+Nathan Sturtevant
+Lisa Bourque
+
+\c[2]External Art\c[0]
 Com-sho tileset packs (compilation) 
     com-sho
     rpgmaker.net/resources/394
@@ -18,36 +22,48 @@ Argent Pixel
     Connary Fagen
     behance.net/gallery/74143595/Argent-Pixel-CF-lo-fi-bitmap-serif-typeface/modules/431271195
 
-\c[2]External Plugins
-DK_Full_Input
+\c[2]External Plugins\c[0]
+\c[2]DK_Full_Input\c[0]
     DKPlugins
     dk-plugins.ru/full-input/
 
-GALV_EventDetectors
+\c[2]GALV_EventDetectors\c[0]
     Galv
     galv-scripts.com
 
-GALV_EventSpawner
+\c[2]GALV_EventSpawner\c[0]
     Galv
     galv-scripts.com
 
-GALV_RollCredits
+\c[2]GALV_RollCredits\c[0]
     Galv
     galvs-scripts.com
 
-Galv_PixelMove
+\c[2]Galv_PixelMove\c[0]
     Galv
     galvs-scripts.com
 
-HIME_PreTitleEvents
+\c[2]HIME_PreTitleEvents\c[0]
     Hime
     himeworks.com/2015/11/pre-title-events/
     
-Jay_VariableMix
+\c[2]Jay_VariableMix\c[0]
     Jason R. Godding
     pastebin.com/Wq8SzNs5
 
-\c[2]Engine
+\c[2]Engine\c[0]
 RPG Maker MV
+
+\c[2]Made in the CMPUT 250 Winter 2022 
+\c[2]course at the University of Alberta\c[0]
+ 
+ 
+ 
+ 
+Thank you for playing our game!
+ 
+ 
+ 
+
 
 </block>
