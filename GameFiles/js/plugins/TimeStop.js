@@ -319,10 +319,12 @@ frs.TimeStop = {}; // Local namespace
     // -------------- UPDATE PROTOTYPES --------------
     let Game_CharacterBase_prototype_initMembers = Game_CharacterBase.prototype.initMembers;
     Game_CharacterBase.prototype.initMembers = function() {
-        this.frs_inTimeStop = false;
-        this.frs_isAffectedByTime = true;
-        this.frs_freezeState = {}; // object for any meta info we need for this event during/post timestop
-        Game_CharacterBase_prototype_initMembers.call(this);
+        try {
+            this.frs_inTimeStop = false;
+            this.frs_isAffectedByTime = true;
+            this.frs_freezeState = {}; // object for any meta info we need for this event during/post timestop
+            Game_CharacterBase_prototype_initMembers.call(this); 
+        } catch (error) { }
     };
 
     let Game_CharacterBase_prototype_update = Game_CharacterBase.prototype.update;
