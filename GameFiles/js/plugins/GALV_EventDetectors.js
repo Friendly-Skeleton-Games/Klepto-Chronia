@@ -301,8 +301,8 @@ Galv.DETECT.isBlock = function(x,y) {
 };
 
 Galv.DETECT.los = function(char1,char2) {
-	var a = {x:char1.x, y:char1.y}; // target (player)
-	var b = {x:char2.x, y:char2.y}; // event
+	var a = {x:Math.round(char1.x), y:Math.round(char1.y)}; // target (player)
+	var b = {x:Math.round(char2.x), y:Math.round(char2.y)}; // event
 
 	// If in front
 	switch (char2._direction) {

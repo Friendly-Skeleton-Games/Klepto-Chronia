@@ -1,0 +1,9 @@
+- Please make the flame animation speed to normal about 4 times.
+When setting three flames, one is normal, one is double, one is quadruple, etc.
+It will look more natural if you set them apart.
+
+- Smoke looks good if the speed is slower than flame.
+Change the stepping speed according to your liking.
+
+- A separate event is made automatically by "Set Movement Route" > "(specify flame or smoke event)" >
+If you use "Change Blend Mode" with "Screen" or "Additive" You can make the flames look more intense.

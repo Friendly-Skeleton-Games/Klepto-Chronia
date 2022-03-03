@@ -1,0 +1,7 @@
+com-sho Traditional Japanese House Tilesets
+
+- Users must own RPG Maker MV in order to use them
+- You can use this however you like (including commercial game)
+x You can not sell the material by itself
+- No need to contact com-sho
+- Credit "com-sho" is optional 
