@@ -225,6 +225,8 @@ frs.TimeStop = {}; // Local namespace
             frs.TimeStop.playerHandleTimestopEnter(object);
         }
 
+        frs.visionLines.set(object._eventId, []);
+
         if (object instanceof Game_Event && !(object instanceof Game_SpawnEvent)) { // only worry about game_events, not GALV spawn events
             let objectEvent = $dataMap.events[object._eventId];
             // Although this is duplicated code, kept explicit cases in event that we need to expand logic for one.
