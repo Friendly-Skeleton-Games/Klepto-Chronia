@@ -396,6 +396,10 @@ Game_Character.prototype.distDetect = function(range,los,id,balloon) {
 	
 	var dist = Galv.DETECT.dist(x1,y1,x2,y2);
 
+	if (frs.drawDetectionArea) {
+		frs.drawDetectionArea(this, range / Galv.DETECT.tile);
+	}
+
 	if (dist <= range) { // If in radius range of target
 		if ((los && Galv.DETECT.los(target,this)) || !los) {  // If LOS to target is not blocked
 			this._dTarget = {x:target.x,y:target.y};  // Set target x,y each step when detected so if los is broken, event still moves to last seen x,y
