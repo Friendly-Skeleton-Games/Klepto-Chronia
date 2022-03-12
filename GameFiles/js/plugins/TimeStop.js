@@ -30,6 +30,7 @@ frs.TimeStop = {}; // Local namespace
     // In format [xOffset, yOffset, eventID]
     frs.TimeStop.timeStopVisualEvents = [
         [0, 2, 8],
+        [0, 2, 9],
     ];
 
     frs.TimeStop.affectedTiles = [];
@@ -168,14 +169,13 @@ frs.TimeStop = {}; // Local namespace
 
     frs.TimeStop.SpawnVisualBubble = function(x, y) {
         let associatedEvents = [];
-        frs.TimeStop.timeStopVisualEvents.forEach(visualSpot => {
-            let xOffset = visualSpot[0];
-            let yOffset = visualSpot[1];
-            let eventID = visualSpot[2];
+        let visualSpot = frs.TimeStop.timeStopVisualEvents[$gameVariables.value(frs.TimeStop.timeCrystalVariable) - 1];
+        let xOffset = visualSpot[0];
+        let yOffset = visualSpot[1];
+        let eventID = visualSpot[2];
 
-            Galv.SPAWN.event(eventID, x + xOffset, y + yOffset);
-            associatedEvents.push($gameMap._lastSpawnEventId);
-        });
+        Galv.SPAWN.event(eventID, x + xOffset, y + yOffset);
+        associatedEvents.push($gameMap._lastSpawnEventId);
         frs.TimeStop.visualTiles.set(frs.TimeStop.cantorPairing(x, y), associatedEvents);
     };
 
