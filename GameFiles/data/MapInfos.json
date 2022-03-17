@@ -135,6 +135,6 @@ null,
 {"id":133,"expanded":false,"name":"Garden 5C","order":15,"parentId":22,"scrollX":819,"scrollY":461},
 {"id":134,"expanded":true,"name":"Time Crystal Room B","order":41,"parentId":71,"scrollX":819,"scrollY":461},
 {"id":135,"expanded":true,"name":"Time Crystal Room C","order":42,"parentId":71,"scrollX":819,"scrollY":461},
-{"id":136,"expanded":false,"name":"Final cutscene part 2","order":66,"parentId":92,"scrollX":832,"scrollY":640},
+{"id":136,"expanded":false,"name":"Final cutscene part 2","order":66,"parentId":92,"scrollX":819,"scrollY":461},
 {"id":137,"expanded":true,"name":"Foyer Main B","order":34,"parentId":41,"scrollX":819,"scrollY":461}
 ]
