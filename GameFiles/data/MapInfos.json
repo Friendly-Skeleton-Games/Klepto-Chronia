@@ -87,8 +87,8 @@ null,
 {"id":85,"expanded":true,"name":"MAP085","order":57,"parentId":77,"scrollX":0,"scrollY":0},
 {"id":86,"expanded":true,"name":"Lab Start Cutscene","order":59,"parentId":44,"scrollX":819,"scrollY":461},
 {"id":87,"expanded":true,"name":"Puzzle 1","order":60,"parentId":44,"scrollX":0,"scrollY":0},
-{"id":88,"expanded":true,"name":"Puzzle 2","order":61,"parentId":44,"scrollX":0,"scrollY":0},
-{"id":89,"expanded":true,"name":"Puzzle 3","order":62,"parentId":44,"scrollX":0,"scrollY":0},
+{"id":88,"expanded":true,"name":"Puzzle 2","order":61,"parentId":44,"scrollX":832,"scrollY":640},
+{"id":89,"expanded":true,"name":"Puzzle 3","order":62,"parentId":44,"scrollX":832,"scrollY":640},
 {"id":90,"expanded":true,"name":"Puzzle 4","order":63,"parentId":44,"scrollX":819,"scrollY":461},
 {"id":91,"expanded":true,"name":"Puzzle 5","order":64,"parentId":44,"scrollX":0,"scrollY":0},
 {"id":92,"expanded":true,"name":"Final Cutscene","order":65,"parentId":44,"scrollX":819,"scrollY":461},
@@ -137,5 +137,5 @@ null,
 {"id":135,"expanded":true,"name":"Time Crystal Room C","order":42,"parentId":71,"scrollX":819,"scrollY":461},
 {"id":136,"expanded":false,"name":"Final cutscene part 2","order":66,"parentId":92,"scrollX":499,"scrollY":337},
 {"id":137,"expanded":true,"name":"Foyer Main B","order":34,"parentId":41,"scrollX":819,"scrollY":461},
-{"id":138,"expanded":false,"name":"Time Crystal Room (Lab)","order":75,"parentId":44,"scrollX":0,"scrollY":0}
+{"id":138,"expanded":false,"name":"Time Crystal Room (Lab)","order":75,"parentId":44,"scrollX":819,"scrollY":461}
 ]
