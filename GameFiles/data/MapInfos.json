@@ -140,5 +140,5 @@ null,
 {"id":138,"expanded":true,"name":"Time Crystal Room (Lab)","order":63,"parentId":44,"scrollX":819,"scrollY":461},
 {"id":139,"expanded":false,"name":"Time Crystal Room B (Lab)","order":64,"parentId":138,"scrollX":832,"scrollY":640},
 {"id":140,"expanded":false,"name":"Time Crystal Room C (Lab)","order":65,"parentId":138,"scrollX":819,"scrollY":461},
-{"id":141,"expanded":false,"name":"Final Cutscene B","order":69,"parentId":44,"scrollX":819,"scrollY":461}
+{"id":141,"expanded":true,"name":"Final Cutscene B","order":69,"parentId":44,"scrollX":819,"scrollY":461}
 ]
