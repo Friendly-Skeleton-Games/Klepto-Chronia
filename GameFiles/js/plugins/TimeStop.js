@@ -23,6 +23,8 @@ var frs = frs || {}; // Main namespace
 frs.TimeStop = {}; // Local namespace
 
 (function() {
+    Galv.SPAWN.overlap = 'all';
+
     frs.TimeStop.timeFreezeVariable = 3;
     frs.TimeStop.timeCrystalVariable = 4;
     frs.TimeStop.timeStopCommonEvent = 3;
@@ -31,6 +33,7 @@ frs.TimeStop = {}; // Local namespace
     frs.TimeStop.timeStopVisualEvents = [
         [0, 2, 8],
         [0, 2, 9],
+        [0, 2, 10], // for cutscene use: worse animation, but it works in cutscenes
     ];
 
     frs.TimeStop.affectedTiles = [];
@@ -167,9 +170,13 @@ frs.TimeStop = {}; // Local namespace
         frs.TimeStop.DespawnVisualBubble(x, y);
     }
 
-    frs.TimeStop.SpawnVisualBubble = function(x, y) {
+    frs.TimeStop.SpawnVisualBubble = function(x, y, visualID) {
+        if (!visualID) {
+            visualID = $gameVariables.value(frs.TimeStop.timeCrystalVariable) - 1;
+        }
+
         let associatedEvents = [];
-        let visualSpot = frs.TimeStop.timeStopVisualEvents[$gameVariables.value(frs.TimeStop.timeCrystalVariable) - 1];
+        let visualSpot = frs.TimeStop.timeStopVisualEvents[visualID];
         let xOffset = visualSpot[0];
         let yOffset = visualSpot[1];
         let eventID = visualSpot[2];
