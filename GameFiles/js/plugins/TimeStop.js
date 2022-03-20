@@ -33,7 +33,7 @@ frs.TimeStop = {}; // Local namespace
     frs.TimeStop.timeStopVisualEvents = [
         [0, 2, 8],
         [0, 2, 9],
-        [0, 2, 10], // for cutscene use: worse animation, but it works in cutscenes
+        [0, 2, 9], // for cutscene use: worse animation, but it works in cutscenes
     ];
 
     frs.TimeStop.affectedTiles = [];
