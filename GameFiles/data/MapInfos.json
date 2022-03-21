@@ -139,6 +139,6 @@ null,
 {"id":137,"expanded":true,"name":"Foyer Main B","order":34,"parentId":41,"scrollX":819,"scrollY":461},
 {"id":138,"expanded":true,"name":"Time Crystal Room (Lab)","order":63,"parentId":44,"scrollX":819,"scrollY":461},
 {"id":139,"expanded":false,"name":"Time Crystal Room B (Lab)","order":64,"parentId":138,"scrollX":442.6666666666667,"scrollY":402.22222222222223},
-{"id":140,"expanded":false,"name":"Time Crystal Room C (Lab)","order":65,"parentId":138,"scrollX":982.8,"scrollY":548.4},
+{"id":140,"expanded":false,"name":"Time Crystal Room C (Lab)","order":65,"parentId":138,"scrollX":819,"scrollY":461},
 {"id":141,"expanded":true,"name":"Final Cutscene B","order":68,"parentId":44,"scrollX":819,"scrollY":461}
 ]
