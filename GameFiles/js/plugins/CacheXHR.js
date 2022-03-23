@@ -6,6 +6,8 @@ frs.XHRDataCache = new Map();
     // Run through all of our files and cache the ones we want cached
     frs.cacheRelevantFiles = function() {
         DataManager.loadDataFile("$dataMap", "Map003.json", true);
+        ImageManager.loadBitmap("img/characters/", "!$Animated-stasis");
+        ImageManager.loadBitmap("img/characters/", "!$Animated-large-stasis");
     }
 
     frs.onAudioDecode = function(buffer) {
