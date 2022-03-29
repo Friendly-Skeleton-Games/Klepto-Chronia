@@ -3,6 +3,8 @@ frs.visionLines = new Map();
 frs.tileSize = 48;
 frs.visionConeBaseSize = 0.1;
 frs.missedVisionCalls = 0;
+frs.lastRenderTime = Date.now();
+frs.attemptedRestartCount = 0;
 
 (function() {
     frs.drawDetectionArea = function(detectorEvent, range) {
@@ -114,10 +116,26 @@ void main() {
         if (frs.missedVisionCalls++ === 2) {
             frs.visionLines = new Map();
         }
+
+        frs.lastRenderTime = Date.now();
+        frs.attemptedRestartCount = 0;
     }
 
     // Copied from rpg_core.js line 1871: just replaces rendering to canvas to rendering to texture, and then calls our post processing function
     Graphics.render = function(stage) {
+        if ((Date.now() - frs.lastRenderTime) / 1000 >= 0.5) {
+            // the rendering has ceased. Attempt to restart the renderer
+            if (frs.postProcessingRenderTexture) {
+                frs.postProcessingRenderTexture.destroy();
+            }
+            frs.postProcessingRenderTexture = PIXI.RenderTexture.create(Graphics.width, Graphics.height);
+            this._skipCount = 0;
+            frs.missedVisionCalls = 0;
+            frs.visionLines = new Map();
+            frs.attemptedRestartCount = frs.attemptedRestartCount + 1;
+            console.log("Attempting to restart renderer (" + frs.attemptedRestartCount + " attempts)");
+        }
+
         if (!frs.postProcessingRenderTexture) {
             // Graphic width/height never changes so we never need to destroy this: will be garbage collected
             frs.postProcessingRenderTexture = PIXI.RenderTexture.create(Graphics.width, Graphics.height);
@@ -126,6 +144,11 @@ void main() {
         if (this._skipCount === 0) {
             var startTime = Date.now();
             if (stage) {
+                // If we attempted to restart the renderer 10 frames in a row and we still dont have results, fallback to old rendering
+                if (frs.attemptedRestartCount >= 10) {
+                    this._renderer.render(stage);
+                }
+                // Still render to render-texture just in case we somehow recover. Double rendering but not too slow
                 this._renderer.render(stage, frs.postProcessingRenderTexture);
                 if (this._renderer.gl && this._renderer.gl.flush) {
                     this._renderer.gl.flush();
