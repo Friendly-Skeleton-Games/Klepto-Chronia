@@ -71,7 +71,29 @@
         let centerX = Graphics.width / 2;
         let centerY = Graphics.height / 1.2;
 
-        this._commandWindow.move(centerX - this._commandWindow._width / 2, centerY - this._commandWindow._height / 2, this._commandWindow._width, this._commandWindow._height);
+        let pX = centerX - this._commandWindow._width / 2;
+        let pY = centerY - this._commandWindow._height / 2;
+
+        this._commandWindow.move(pX, pY, this._commandWindow._width, this._commandWindow._height);
+
+        let controlWidth = 0.42;
+        let controlHeight = 0.45;
+
+        let x = 20 - pX;
+        let y = 100 - pY;
+
+        let controls = ImageManager.loadPicture('Controls');
+        let controlSprite = new Sprite();
+        controlSprite.bitmap = controls;
+        console.log(controlSprite);
+
+        controlSprite.scale.x = controlWidth;
+        controlSprite.scale.y = controlHeight;
+
+        controlSprite.x = x;
+        controlSprite.y = y
+
+        this._commandWindow.addChild(controlSprite);
 
         this.addWindow(this._commandWindow);
     };
