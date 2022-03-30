@@ -31,6 +31,7 @@ frs.attemptedRestartCount = 0;
                 break;
         };
     
+        let hitEvent = null;
         let currentTile = [detectorEvent._x, detectorEvent._y];
         let distance = 0;
         for (distance = 0; distance < range; distance++) {
@@ -38,7 +39,46 @@ frs.attemptedRestartCount = 0;
             currentTile[1] += incrementDirection[1];
 
             if (Galv.DETECT.isBlock(currentTile[0], currentTile[1])) {
+                $gameMap.eventsXy(currentTile[0], currentTile[1]).forEach(function(event) {
+                    if (event instanceof Game_CharacterBase) {
+                        hitEvent = event;
+                    }
+                });
                 break;
+            }
+        }
+
+        if (hitEvent) {
+            let movingOffset = 0;
+            switch (hitEvent._direction) {
+                case 8:
+                    movingOffset = hitEvent._realY - Math.floor(hitEvent._realY);
+                    break;
+                case 6:
+                    movingOffset = Math.ceil(hitEvent._realX) - hitEvent._realX;
+                    break;
+                case 2:
+                    movingOffset = Math.ceil(hitEvent._realY) - hitEvent._realY;
+                    break;
+                case 4:
+                    movingOffset = hitEvent._realX - Math.floor(hitEvent._realX);
+                    break;
+                default:
+                    break;
+            };
+
+            if (
+                    (hitEvent._direction === 8 && detectorEvent._direction === 8) || (hitEvent._direction === 2 && detectorEvent._direction === 2) ||
+                    (hitEvent._direction === 4 && detectorEvent._direction === 4) || (hitEvent._direction === 6 && detectorEvent._direction === 6)
+                ) {
+                // in same direction
+                distanceOffest -= movingOffset;
+            } else if (
+                (hitEvent._direction === 8 && detectorEvent._direction === 2) || (hitEvent._direction === 2 && detectorEvent._direction === 8) ||
+                (hitEvent._direction === 4 && detectorEvent._direction === 6) || (hitEvent._direction === 6 && detectorEvent._direction === 4)
+                ) {
+                // in opposite direction
+                distanceOffest += movingOffset;
             }
         }
 
