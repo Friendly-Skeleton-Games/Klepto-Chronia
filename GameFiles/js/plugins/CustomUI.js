@@ -37,7 +37,6 @@
     /* ------------------------------------- */
 
     Window_Options.prototype.addGeneralOptions = function() {
-        this.addCommand(TextManager.commandRemember, 'commandRemember');
     };
 
     Scene_Menu.prototype.create = function() {
