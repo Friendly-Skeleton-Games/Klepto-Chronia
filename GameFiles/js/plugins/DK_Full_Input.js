@@ -954,7 +954,10 @@ Input._onKeyDown = function(event) {
 	}
 
     if (FullInputParams['Latest Button Variable'] > 0) {
-        $gameVariables.setValue(FullInputParams['Latest Button Variable'], event.keyCode);
+        if ($gameVariables)
+        {
+            $gameVariables.setValue(FullInputParams['Latest Button Variable'], event.keyCode);
+        }
     }
 };
 
