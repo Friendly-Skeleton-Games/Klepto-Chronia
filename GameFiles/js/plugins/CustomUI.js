@@ -69,7 +69,7 @@
         this._commandWindow.setHandler('cancel',    this.popScene.bind(this));
 
         let centerX = Graphics.width / 2;
-        let centerY = Graphics.height / 1.2;
+        let centerY = Graphics.height / 1.26;
 
         let pX = centerX - this._commandWindow._width / 2;
         let pY = centerY - this._commandWindow._height / 2;
