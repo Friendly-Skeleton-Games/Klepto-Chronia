@@ -1,7 +1,7 @@
 [
 null,
 {"id":1,"expanded":false,"name":"Mason","order":97,"parentId":4,"scrollX":819,"scrollY":461},
-{"id":2,"expanded":false,"name":"EventMap","order":5,"parentId":28,"scrollX":759.3333333333334,"scrollY":430.6666666666667},
+{"id":2,"expanded":false,"name":"EventMap","order":5,"parentId":28,"scrollX":819,"scrollY":461},
 {"id":3,"expanded":false,"name":"Reset","order":2,"parentId":28,"scrollX":819,"scrollY":461},
 {"id":4,"expanded":true,"name":"Work-Spaces","order":78,"parentId":0,"scrollX":819,"scrollY":461},
 {"id":5,"expanded":false,"name":"TechDemoMap","order":136,"parentId":0,"scrollX":819,"scrollY":461},
