@@ -11,7 +11,7 @@
     };
 
     Window_Hint.prototype.makeCommandList = function() {
-        this.addCommand("Your Hint Here", 'gameHint', true);
+        this.addCommand("Toggle No-Clip", 'gameHint', true);
     };
 
     function Scene_Hint() {
@@ -29,7 +29,10 @@
         Scene_MenuBase.prototype.create.call(this);
 
         this._hintWindow = new Window_Hint(0, 0);
-        this._hintWindow.setHandler('gameHint', this.popScene.bind(this));
+        this._hintWindow.setHandler('gameHint', (function() {
+            ;
+            this.popScene()
+        }).bind(this));
 
         this.addWindow(this._hintWindow);
     };
@@ -49,7 +52,7 @@
     };
 
     Window_MenuCommand.prototype.addOriginalCommands = function() {
-        //this.addCommand("Request Hint", 'hint', true);
+        this.addCommand("(Cheat) Toggle No-Clip", 'hint', true);
     };
 
     Window_MenuCommand.prototype.makeCommandList = function() {
@@ -61,8 +64,8 @@
 
     Scene_Menu.prototype.createCommandWindow = function() {
         this._commandWindow = new Window_MenuCommand(0, 0);
-        this._commandWindow.setHandler('hint',      this.hint.bind(this));
         this._commandWindow.setHandler('options',   this.commandOptions.bind(this));
+        this._commandWindow.setHandler('hint',      (function(){ $gamePlayer._through = !$gamePlayer._through; this.popScene(); }).bind(this));
         this._commandWindow.setHandler('save',      this.commandSave.bind(this));
         this._commandWindow.setHandler('gameEnd',   this.commandGameEnd.bind(this));
         this._commandWindow.setHandler('cancel',    this.popScene.bind(this));
