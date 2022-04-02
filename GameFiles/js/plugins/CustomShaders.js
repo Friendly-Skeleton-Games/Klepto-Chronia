@@ -5,6 +5,8 @@ frs.visionConeBaseSize = 0.1;
 frs.missedVisionCalls = 0;
 frs.lastRenderTime = Date.now();
 frs.attemptedRestartCount = 0;
+frs.coneColour = 0xa30b1d;
+frs.coneOpacity = 0.4;
 
 (function() {
     frs.drawDetectionArea = function(detectorEvent, range) {
@@ -105,7 +107,7 @@ void main() {
         let guardVisionTriangles = new PIXI.Graphics();
         guardVisionTriangles.filters = [frs.visionShader];
 
-        guardVisionTriangles.beginFill(0xFFFFFF, 0.2);
+        guardVisionTriangles.beginFill(frs.coneColour, frs.coneOpacity);
         frs.visionLines.forEach(lineData => {
             let origin = lineData[0];
             let direction = lineData[1];
