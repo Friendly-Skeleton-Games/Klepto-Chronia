@@ -153,7 +153,7 @@ void main() {
         let finalImage = PIXI.Sprite.from(frs.postProcessingRenderTexture);
         graphics._renderer.render(finalImage);
 
-        if (frs.missedVisionCalls++ === 2) {
+        if (frs.missedVisionCalls++ === 5) {
             frs.visionLines = new Map();
         }
 
