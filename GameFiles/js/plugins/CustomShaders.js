@@ -1,11 +1,16 @@
 var frs = frs || {}; // Main namespace
+
+frs.gardenColour = 0xa30b1d;
+frs.foyerColour = 0xf2ce00;
+frs.labColour = 0xf2ce00;
+
 frs.visionLines = new Map();
 frs.tileSize = 48;
 frs.visionConeBaseSize = 0.1;
 frs.missedVisionCalls = 0;
 frs.lastRenderTime = Date.now();
 frs.attemptedRestartCount = 0;
-frs.coneColour = 0xa30b1d;
+frs.coneColour = frs.gardenColour;
 frs.coneOpacity = 0.4;
 
 (function() {
