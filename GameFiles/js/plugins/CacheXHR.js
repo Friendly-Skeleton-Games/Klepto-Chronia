@@ -5,7 +5,46 @@ frs.XHRDataCache = new Map();
 (function() {
     // Run through all of our files and cache the ones we want cached
     frs.cacheRelevantFiles = function() {
+        DataManager.loadDataFile("$dataMap", "Map015.json", true);
         DataManager.loadDataFile("$dataMap", "Map003.json", true);
+        DataManager.loadDataFile("$dataMap", "Map001.json", true);
+        DataManager.loadDataFile("$dataMap", "Map027.json", true);
+        DataManager.loadDataFile("$dataMap", "Map019.json", true);
+        DataManager.loadDataFile("$dataMap", "Map020.json", true);
+        DataManager.loadDataFile("$dataMap", "Map021.json", true);
+        DataManager.loadDataFile("$dataMap", "Map131.json", true);
+        DataManager.loadDataFile("$dataMap", "Map132.json", true);
+        DataManager.loadDataFile("$dataMap", "Map133.json", true);
+        DataManager.loadDataFile("$dataMap", "Map029.json", true);
+        DataManager.loadDataFile("$dataMap", "Map031.json", true);
+        DataManager.loadDataFile("$dataMap", "Map057.json", true);
+        DataManager.loadDataFile("$dataMap", "Map030.json", true);
+        DataManager.loadDataFile("$dataMap", "Map065.json", true);
+        DataManager.loadDataFile("$dataMap", "Map025.json", true);
+        DataManager.loadDataFile("$dataMap", "Map062.json", true);
+        DataManager.loadDataFile("$dataMap", "Map032.json", true);
+        DataManager.loadDataFile("$dataMap", "Map066.json", true);
+        DataManager.loadDataFile("$dataMap", "Map143.json", true);
+        DataManager.loadDataFile("$dataMap", "Map069.json", true);
+        DataManager.loadDataFile("$dataMap", "Map070.json", true);
+        DataManager.loadDataFile("$dataMap", "Map071.json", true);
+        DataManager.loadDataFile("$dataMap", "Map134.json", true);
+        DataManager.loadDataFile("$dataMap", "Map135.json", true);
+        DataManager.loadDataFile("$dataMap", "Map072.json", true);
+        DataManager.loadDataFile("$dataMap", "Map074.json", true);
+        DataManager.loadDataFile("$dataMap", "Map076.json", true);
+        DataManager.loadDataFile("$dataMap", "Map137.json", true);
+        DataManager.loadDataFile("$dataMap", "Map086.json", true);
+        DataManager.loadDataFile("$dataMap", "Map087.json", true);
+        DataManager.loadDataFile("$dataMap", "Map090.json", true);
+        DataManager.loadDataFile("$dataMap", "Map089.json", true);
+        DataManager.loadDataFile("$dataMap", "Map088.json", true);
+        DataManager.loadDataFile("$dataMap", "Map138.json", true);
+        DataManager.loadDataFile("$dataMap", "Map139.json", true);
+        DataManager.loadDataFile("$dataMap", "Map140.json", true);
+        DataManager.loadDataFile("$dataMap", "Map075.json", true);
+        DataManager.loadDataFile("$dataMap", "Map141.json", true);
+        DataManager.loadDataFile("$dataMap", "Map136.json", true);
         ImageManager.loadBitmap("img/characters/", "!$Animated-stasis");
         ImageManager.loadBitmap("img/characters/", "!$Animated-large-stasis");
     }
