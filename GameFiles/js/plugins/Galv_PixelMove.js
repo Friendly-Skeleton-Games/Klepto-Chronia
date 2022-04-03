@@ -197,7 +197,7 @@ Galv.PMOVE.diagRow = {
 };
 
 // DISABLE MOUSE MOVE
-/*Game_Player.prototype.triggerAction = function() {
+Game_Player.prototype.triggerAction = function() {
     if (this.canMove()) {
         if (this.triggerButtonAction()) {
             return true;
@@ -206,8 +206,8 @@ Galv.PMOVE.diagRow = {
     return false;
 };
 
-//Game_Player.prototype.triggerTouchAction = function() {};
-//Scene_Map.prototype.processMapTouch = function() {};*/
+Game_Player.prototype.triggerTouchAction = function() {};
+Scene_Map.prototype.processMapTouch = function() {};
 // END DISABLE MOUSE MOVE
 
 
