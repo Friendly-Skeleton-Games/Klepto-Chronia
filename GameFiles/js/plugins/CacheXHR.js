@@ -45,8 +45,15 @@ frs.XHRDataCache = new Map();
         DataManager.loadDataFile("$dataMap", "Map075.json", true);
         DataManager.loadDataFile("$dataMap", "Map141.json", true);
         DataManager.loadDataFile("$dataMap", "Map136.json", true);
+
         ImageManager.loadBitmap("img/characters/", "!$Animated-stasis");
         ImageManager.loadBitmap("img/characters/", "!$Animated-large-stasis");
+
+        ImageManager.loadBitmap("img/pictures/", "Amelphi");
+        ImageManager.loadBitmap("img/pictures/", "Controls");
+        ImageManager.loadBitmap("img/pictures/", "EnterPrompt");
+        ImageManager.loadBitmap("img/pictures/", "fftooltip");
+        ImageManager.loadBitmap("img/pictures/", "FSG");
     }
 
     frs.onAudioDecode = function(buffer) {
