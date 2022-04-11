@@ -88,7 +88,7 @@ AudioManager.playVariableBgm = function() {
 		return;
 	}
 	var bgmPos = AudioManager.saveBgm();
-	this._bgmBuffer.fadeOut(0.5);
+	this._bgmBuffer.fadeOut(0.2);
 	if(this._spareBuffer) {
 		this._spareBuffer.stop();
 	}
@@ -104,7 +104,7 @@ AudioManager.playVariableBgm = function() {
 	this._bgmBuffer = this._variableBuffer;
 	this._variableBuffer = null;
 	this.updateBgmParameters(bgm);
-	this._bgmBuffer.fadeIn(0.5);
+	this._bgmBuffer.fadeIn(0.2);
 	this.updateCurrentBgm(bgm, currentPos);
 }
 
